@@ -1,0 +1,15 @@
+---
+layout: null
+permalink: /en/search.json
+---
+[
+{% assign posts = site.posts | where: "lang", "en" | where_exp: "p", "p.hidden != true" %}{% for post in posts %}{
+  "title": {{ post.title | jsonify }},
+  "url": {{ post.url | relative_url | jsonify }},
+  "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
+  "description": {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 200 | jsonify }},
+  "tags": {{ post.tags | jsonify }},
+  "til": {% if post.tags contains "til" %}true{% else %}false{% endif %},
+  "body": {{ post.content | strip_html | strip_newlines | truncate: 1200 | jsonify }}
+}{% unless forloop.last %},{% endunless %}{% endfor %}
+]

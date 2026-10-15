@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: til-decimal-ip
 title: "TIL : une adresse IP peut s'écrire en un seul nombre"
 description: "23.94.145.93 et 392073565 pointent vers la même machine. Les malwares s'en servent pour échapper aux filtres d'URL."
 tags: [til, réseau, malware]

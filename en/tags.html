@@ -1,0 +1,15 @@
+---
+layout: default
+title: Tags
+permalink: /en/tags/
+lang: en
+---
+<section class="hero small"><h1><span class="br">&lt;</span> Tags <span class="br">/&gt;</span></h1></section>
+<section class="tagidx">
+{% assign en_posts = site.posts | where: "lang", "en" %}
+{% assign all_tags = en_posts | map: "tags" | join: "," | split: "," | group_by_exp: "t","t" | sort_natural: "name" %}
+{% for t in all_tags %}
+  <div class="tg" id="{{ t.name | slugify }}"><h2>#{{ t.name }} <small>{{ t.size }}</small></h2>
+  <ul>{% assign tagged = en_posts | where_exp: "p", "p.tags contains t.name" %}{% for post in tagged %}<li><a href="{{ post.url | relative_url }}">{{ post.title }}</a><time>{{ post.date | date: '%Y-%m-%d' }}</time></li>{% endfor %}</ul></div>
+{% endfor %}
+</section>

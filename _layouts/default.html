@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.lang }}">
+{% assign htmllang = page.lang | default: site.lang %}<html lang="{{ htmllang }}">
 <head>{% include head.html %}</head>
 <body>
 <div class="grid-bg" aria-hidden="true"></div>

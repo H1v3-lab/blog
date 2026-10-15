@@ -3,26 +3,26 @@ layout: default
 ---
 {% assign words = content | strip_html | number_of_words %}{% assign minutes = words | divided_by: 200 | plus: 1 %}
 <article class="post">
-  <a class="back" href="{{ '/' | relative_url }}">← Tous les articles</a>
+  {% assign en = false %}{% if page.lang == 'en' %}{% assign en = true %}{% endif %}<a class="back" href="{% if en %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}">← {% if en %}All articles{% else %}Tous les articles{% endif %}</a>
   <header class="post-h">
-    <div class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%d/%m/%Y' }}</time><span>·</span><span>{{ minutes }} min de lecture</span></div>
+    <div class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%d/%m/%Y' }}</time><span>·</span><span>{{ minutes }} min{% unless en %} de lecture{% else %} read{% endunless %}</span></div>
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
     {% if page.tags.size > 0 %}<div class="tags">{% for t in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">#{{ t }}</a>{% endfor %}</div>{% endif %}
   </header>
   {% if page.series %}{% assign sp = site.posts | where: "series", page.series | sort: "date" %}
-  <nav class="series-nav"><span class="kicker">Série · {{ page.series }}</span><ol>{% for p in sp %}<li{% if p.url == page.url %} class="cur" aria-current="true"{% endif %}><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}</ol></nav>
+  <nav class="series-nav"><span class="kicker">{% if en %}Series{% else %}Série{% endif %} · {{ page.series }}</span><ol>{% for p in sp %}<li{% if p.url == page.url %} class="cur" aria-current="true"{% endif %}><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}</ol></nav>
   {% endif %}
-  {% if page.toc != false %}<nav class="toc" id="toc" hidden><span class="kicker">Sommaire</span><ol></ol></nav>{% endif %}
+  {% if page.toc != false %}<nav class="toc" id="toc" hidden><span class="kicker">{% if en %}Contents{% else %}Sommaire{% endif %}</span><ol></ol></nav>{% endif %}
   <div class="md">{{ content }}</div>
   <aside class="author">
     <span class="logo">0_0</span>
-    <div><b>Dominique-Savio SAKOI · Dmod</b><p>Junior Security Engineer à l'esprit offensif, joueur de CTF et défenseur de la vie privée.</p>
+    <div><b>Dominique-Savio SAKOI · Dmod</b><p>{% if en %}Junior Security Engineer with an offensive mindset, CTF player and privacy advocate.{% else %}Junior Security Engineer à l'esprit offensif, joueur de CTF et défenseur de la vie privée.{% endif %}</p>
     <a href="{{ site.portfolio }}">Portfolio</a> · <a href="{{ site.linkedin }}">LinkedIn</a></div>
   </aside>
   <nav class="pn">
-    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>Précédent</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
-    {% if page.next %}<a class="nx" href="{{ page.next.url | relative_url }}"><small>Suivant</small>{{ page.next.title }}</a>{% endif %}
+    {% assign prev = page.previous %}{% assign nxt = page.next %}{% if prev and prev.lang != page.lang %}{% assign prev = nil %}{% endif %}{% if nxt and nxt.lang != page.lang %}{% assign nxt = nil %}{% endif %}{% if prev %}<a href="{{ prev.url | relative_url }}"><small>{% if en %}Previous{% else %}Précédent{% endif %}</small>{{ prev.title }}</a>{% else %}<span></span>{% endif %}
+    {% if nxt %}<a class="nx" href="{{ nxt.url | relative_url }}"><small>{% if en %}Next{% else %}Suivant{% endif %}</small>{{ nxt.title }}</a>{% endif %}
   </nav>
 </article>
 {% include newsletter.html %}

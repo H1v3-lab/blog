@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: jwt-confusion
 title: "Writeup : la confusion d'algorithme JWT (RS256 → HS256)"
 description: "Comment transformer une clé publique — faite pour être partagée — en clé de signature, et forger un jeton d'administrateur. Une faille classique mais toujours vivante."
 tags: [ctf, web, crypto, jwt]

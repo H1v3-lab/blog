@@ -29,7 +29,7 @@
   if(q){const cards=[...document.querySelectorAll("#list .card")];
     const none=document.getElementById("noresult"),series=document.getElementById("series"),filters=document.getElementById("filters");
     let index=null;
-    fetch("/search.json").then(r=>r.json()).then(d=>{index=d}).catch(()=>{});
+    fetch(location.pathname.indexOf("/en/")===0?"/en/search.json":"/search.json").then(r=>r.json()).then(d=>{index=d}).catch(()=>{});
     const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
     const run=()=>{const term=norm(q.value.trim());
       if(filters)filters.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.tag===""));

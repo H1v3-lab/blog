@@ -13,7 +13,22 @@ Blog de Dmod (Dominique-Savio SAKOI). Site statique généré par **Jekyll**, pu
 Brouillons : un fichier dans `_drafts/` n'est jamais publié.
 Images : dépose-les dans `assets/img/` et insère-les avec `![description](/assets/img/fichier.png)`.
 
-### Options de l'en-tête
+### Bilingue FR / EN
+
+Chaque article existe en deux versions reliées par une clé `ref:` commune. L'en-tête d'un article porte :
+
+```
+lang: fr            # ou en
+ref: mon-article    # identique entre la version FR et la version EN
+```
+
+- la version anglaise ajoute un `permalink: /en/2026/10/slug-anglais/` ;
+- un bouton **FR / EN** apparaît automatiquement en haut de l'article et bascule vers la traduction ;
+- le blog anglais vit sous `/en/` (accueil, tags, TIL, recherche), avec sa propre liste d'articles.
+
+Pour traduire un article : copie le fichier, change `lang`, le `title`/`description`/contenu, ajoute le `permalink: /en/...`, et garde le même `ref`.
+
+### Autres options de l'en-tête
 
 - `series: "Nom"` — regroupe plusieurs articles ; une bannière de navigation apparaît dans chaque article de la série, et une carte sur la page d'accueil.
 - `tags: [til, ...]` — un article avec le tag `til` apparaît aussi sur la page **/til/** (notes courtes).

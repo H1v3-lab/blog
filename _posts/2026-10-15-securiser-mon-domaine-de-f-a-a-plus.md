@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: domain-hardening
 title: "J'ai sécurisé mon propre domaine : de la note F à A+"
 description: "En-têtes HTTP, HSTS, CSP stricte, DNSSEC, CAA, DMARC : le journal de bord de la mise en sécurité de sakoi-cyber.me, et ce que chaque réglage protège réellement."
 tags: [défense, web, durcissement, vie privée]

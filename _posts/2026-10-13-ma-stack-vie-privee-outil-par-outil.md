@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: privacy-stack
 title: "Ma stack vie privée, outil par outil"
 description: "Les outils que j'utilise au quotidien pour réduire ce que j'expose, chiffrer ce que je garde, et ne jamais confier à un service plus que nécessaire — avec le pourquoi de chaque choix."
 tags: [vie privée, chiffrement, outils]

@@ -1,0 +1,54 @@
+---
+layout: default
+title: Articles
+permalink: /en/
+lang: en
+description: "Offensive security, CTF, defense and privacy — the notes of Dominique-Savio SAKOI (Dmod)."
+---
+{% assign en_posts = site.posts | where: "lang", "en" %}
+<section class="hero">
+  <div class="prompt"><i>&gt;_</i> cat ~/blog/README</div>
+  <h1><span class="br">&lt;</span> Blog <span class="br">/&gt;</span></h1>
+  <p class="lead">Offensive security, CTF, defense and privacy — notes by Dominique-Savio SAKOI (Dmod).</p>
+  <div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="q" placeholder="Search an article, a tag, a keyword…" aria-label="Search" autocomplete="off"></div>
+  {% assign all_tags = en_posts | map: "tags" | join: "," | split: "," | group_by_exp: "t","t" | sort_natural: "name" %}
+  {% if all_tags.size > 0 %}<div class="filters" id="filters"><button type="button" class="on" data-tag="">All</button>{% for t in all_tags %}<button type="button" data-tag="{{ t.name | slugify }}">#{{ t.name }} <small>{{ t.size }}</small></button>{% endfor %}</div>{% endif %}
+</section>
+
+{% assign series_posts = en_posts | where_exp: "p", "p.series" %}
+{% if series_posts.size > 0 %}
+{% assign series_names = series_posts | map: "series" | uniq | sort %}
+<section class="series-idx" id="series">
+  <span class="kicker">Series</span>
+  <div class="series-grid">
+  {% for name in series_names %}
+    {% assign in_series = series_posts | where: "series", name | sort: "date" %}
+    {% assign first = in_series | first %}
+    <a class="scard" href="{{ first.url | relative_url }}">
+      <span class="scount">{{ in_series.size }} episode{% if in_series.size > 1 %}s{% endif %}</span>
+      <h3>{{ name }}</h3>
+      <ol>{% for p in in_series %}<li>{{ p.title }}</li>{% endfor %}</ol>
+      <span class="go">Start →</span>
+    </a>
+  {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="list" id="list">
+  {% assign posts = en_posts | where_exp: "p", "p.hidden != true" %}
+  {% for post in posts %}
+  {% assign words = post.content | strip_html | number_of_words %}{% assign minutes = words | divided_by: 200 | plus: 1 %}
+  <a class="card{% if forloop.first %} first{% endif %}{% if post.tags contains 'til' %} til{% endif %}" href="{{ post.url | relative_url }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}" data-text="{{ post.title | downcase | escape }} {{ post.description | default: post.excerpt | strip_html | downcase | escape }} {% for t in post.tags %}{{ t | downcase }} {% endfor %}">
+    <div class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y-%m-%d' }}</time><span>·</span><span>{{ minutes }} min</span>{% if post.tags contains 'til' %}<span class="badge">TIL</span>{% endif %}{% if post.series %}<span class="badge sr">{{ post.series }}</span>{% endif %}</div>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description | default: post.excerpt | strip_html | truncate: 220 }}</p>
+    {% if post.tags.size > 0 %}<div class="tags">{% for t in post.tags %}<span class="tag">#{{ t }}</span>{% endfor %}</div>{% endif %}
+    <span class="go">Read →</span>
+  </a>
+  {% endfor %}
+  <p class="empty" id="noresult" hidden>No article matches this search.</p>
+  {% if posts.size == 0 %}<p class="empty">First article coming soon.</p>{% endif %}
+</section>
+
+{% include newsletter.html %}

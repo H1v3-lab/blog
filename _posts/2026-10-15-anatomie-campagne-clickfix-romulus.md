@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: clickfix
 title: "Anatomie d'une campagne ClickFix : quand la victime lance elle-même le malware"
 description: "Analyse d'une chaîne d'infection réelle où aucune faille n'est exploitée : c'est l'utilisateur qui colle la commande. Du faux CAPTCHA au voleur de clés Chrome, huit étapes conçues pour tromper chaque défense une par une."
 tags: [analyse, malware, reverse, défense, clickfix]

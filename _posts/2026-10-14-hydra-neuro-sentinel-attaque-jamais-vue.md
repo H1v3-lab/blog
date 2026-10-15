@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: hydra-1
 title: "Les coulisses de Hydra, épisode 1 : détecter une attaque jamais vue"
 description: "Comment Neuro-Sentinel, le cœur défensif de Hydra, repère une intrusion sans jamais avoir vu sa signature — en apprenant d'abord à quoi ressemble un réseau sain."
 series: "Les coulisses de Hydra"

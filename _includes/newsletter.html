@@ -1,16 +1,17 @@
+{% assign en = false %}{% if page.lang == 'en' or page.url contains '/en/' %}{% assign en = true %}{% endif %}
 <section class="sub">
   <div class="sub-in">
-    <span class="kicker">Rester au courant</span>
-    <h2>Un nouvel article de temps en temps</h2>
-    <p>Writeups, analyses de malware, vie privée. Pas de pistage, pas de revente, un clic pour se désabonner.</p>
+    <span class="kicker">{% if en %}Stay in the loop{% else %}Rester au courant{% endif %}</span>
+    <h2>{% if en %}A new article now and then{% else %}Un nouvel article de temps en temps{% endif %}</h2>
+    <p>{% if en %}Writeups, malware analysis, privacy. No tracking, no reselling, one click to unsubscribe.{% else %}Writeups, analyses de malware, vie privée. Pas de pistage, pas de revente, un clic pour se désabonner.{% endif %}</p>
     {% if site.buttondown %}
     <form class="sub-f" action="https://buttondown.com/api/emails/embed-subscribe/{{ site.buttondown }}" method="post" target="_blank">
-      <input type="email" name="email" placeholder="ton@email.com" aria-label="Adresse e-mail" required>
-      <button type="submit">S'abonner</button>
+      <input type="email" name="email" placeholder="{% if en %}you@email.com{% else %}ton@email.com{% endif %}" aria-label="{% if en %}Email address{% else %}Adresse e-mail{% endif %}" required>
+      <button type="submit">{% if en %}Subscribe{% else %}S'abonner{% endif %}</button>
     </form>
-    <p class="sub-fine">E-mail géré par Buttondown · <a href="{{ '/feed.xml' | relative_url }}">ou via RSS</a>, sans adresse e-mail.</p>
+    <p class="sub-fine">{% if en %}E-mail handled by Buttondown · <a href="{{ '/feed.xml' | relative_url }}">or via RSS</a>, without an e-mail address.{% else %}E-mail géré par Buttondown · <a href="{{ '/feed.xml' | relative_url }}">ou via RSS</a>, sans adresse e-mail.{% endif %}</p>
     {% else %}
-    <p class="sub-fine">Abonne-toi au <a href="{{ '/feed.xml' | relative_url }}">flux RSS</a> avec n'importe quel lecteur : les articles arrivent sans que tu donnes ton adresse.</p>
+    <p class="sub-fine">{% if en %}Subscribe to the <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a> with any reader: articles come to you without giving your address.{% else %}Abonne-toi au <a href="{{ '/feed.xml' | relative_url }}">flux RSS</a> avec n'importe quel lecteur : les articles arrivent sans que tu donnes ton adresse.{% endif %}</p>
     {% endif %}
   </div>
 </section>

@@ -2,17 +2,18 @@
 layout: default
 title: Articles
 ---
+{% assign fr_posts = site.posts | where_exp: "p", "p.lang != 'en'" %}
 <section class="hero">
   <div class="prompt"><i>&gt;_</i> cat ~/blog/README</div>
   <h1><span class="br">&lt;</span> Blog <span class="br">/&gt;</span></h1>
   <p class="lead">{{ site.description }}</p>
   <div class="searchbar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="q" placeholder="Rechercher un article, un tag, un mot-clé…" aria-label="Rechercher" autocomplete="off"></div>
-  {% assign all_tags = site.tags | sort %}
-  {% if all_tags.size > 0 %}<div class="filters" id="filters"><button type="button" class="on" data-tag="">Tous</button>{% for t in all_tags %}<button type="button" data-tag="{{ t[0] | slugify }}">#{{ t[0] }} <small>{{ t[1].size }}</small></button>{% endfor %}</div>{% endif %}
+  {% assign all_tags = fr_posts | map: "tags" | join: "," | split: "," | group_by_exp: "t","t" | sort_natural: "name" %}
+  {% if all_tags.size > 0 %}<div class="filters" id="filters"><button type="button" class="on" data-tag="">Tous</button>{% for t in all_tags %}<button type="button" data-tag="{{ t.name | slugify }}">#{{ t.name }} <small>{{ t.size }}</small></button>{% endfor %}</div>{% endif %}
 </section>
 
-{% comment %} Series overview: any post with a `series:` front-matter key {% endcomment %}
-{% assign series_posts = site.posts | where_exp: "p", "p.series" %}
+{% comment %} Series overview {% endcomment %}
+{% assign series_posts = fr_posts | where_exp: "p", "p.series" %}
 {% if series_posts.size > 0 %}
 {% assign series_names = series_posts | map: "series" | uniq | sort %}
 <section class="series-idx" id="series">
@@ -33,7 +34,7 @@ title: Articles
 {% endif %}
 
 <section class="list" id="list">
-  {% assign posts = site.posts | where_exp: "p", "p.hidden != true" %}
+  {% assign posts = fr_posts | where_exp: "p", "p.hidden != true" %}
   {% for post in posts %}
   {% assign words = post.content | strip_html | number_of_words %}{% assign minutes = words | divided_by: 200 | plus: 1 %}
   <a class="card{% if forloop.first %} first{% endif %}{% if post.tags contains 'til' %} til{% endif %}" href="{{ post.url | relative_url }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}" data-text="{{ post.title | downcase | escape }} {{ post.description | default: post.excerpt | strip_html | downcase | escape }} {% for t in post.tags %}{{ t | downcase }} {% endfor %}">

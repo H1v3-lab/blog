@@ -10,7 +10,7 @@ description: "Notes courtes : une chose apprise, en quelques lignes."
   <p class="lead">« Today I Learned » : des notes courtes, une idée par note. Moins léché qu'un article, mais publié souvent.</p>
 </section>
 <section class="list">
-  {% assign tils = site.posts | where_exp: "p", "p.tags contains 'til'" %}
+  {% assign tils = site.posts | where_exp: "p", "p.lang != 'en'" | where_exp: "p", "p.tags contains 'til'" %}
   {% for post in tils %}
   <a class="card til" href="{{ post.url | relative_url }}">
     <div class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d/%m/%Y' }}</time><span class="badge">TIL</span></div>

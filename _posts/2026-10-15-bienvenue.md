@@ -1,4 +1,6 @@
 ---
+lang: fr
+ref: welcome
 title: "Bienvenue sur mon blog"
 description: "Pourquoi ce blog, et ce que vous allez y trouver : writeups CTF, sécurité offensive et défensive, vie privée."
 tags: [blog, cybersécurité]

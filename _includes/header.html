@@ -1,10 +1,20 @@
+{% assign is_en = false %}{% if page.lang == 'en' or page.url contains '/en/' %}{% assign is_en = true %}{% endif %}
 <header class="top">
-  <a class="brand" href="{{ '/' | relative_url }}"><span class="logo">0_0</span><span><b>Dmod</b><small>blog</small></span></a>
+  <a class="brand" href="{% if is_en %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}"><span class="logo">0_0</span><span><b>Dmod</b><small>blog</small></span></a>
   <nav>
+  {% if is_en %}
+    <a href="{{ '/en/' | relative_url }}"{% if page.url == '/en/' %} class="on"{% endif %}>Articles</a>
+    <a href="{{ '/en/til/' | relative_url }}"{% if page.url == '/en/til/' %} class="on"{% endif %}>TIL</a>
+    <a href="{{ '/en/tags/' | relative_url }}"{% if page.url == '/en/tags/' %} class="on"{% endif %}>Tags</a>
+    <a href="{{ '/feed.xml' | relative_url }}" title="RSS feed">RSS</a>
+    <a class="pf" href="{{ site.portfolio }}">Portfolio ↗</a>
+  {% else %}
     <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="on"{% endif %}>Articles</a>
     <a href="{{ '/til/' | relative_url }}"{% if page.url == '/til/' %} class="on"{% endif %}>TIL</a>
     <a href="{{ '/tags/' | relative_url }}"{% if page.url == '/tags/' %} class="on"{% endif %}>Tags</a>
     <a href="{{ '/feed.xml' | relative_url }}" title="Flux RSS">RSS</a>
     <a class="pf" href="{{ site.portfolio }}">Portfolio ↗</a>
+  {% endif %}
+    {% include lang-switch.html %}
   </nav>
 </header>

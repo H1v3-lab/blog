@@ -1,0 +1,8 @@
+{% comment %} FR/EN switch: on a post, jump to the translation via `ref`; elsewhere toggle site root. {% endcomment %}
+{% if page.lang == 'en' %}
+  {% if page.ref %}{% assign other = site.posts | where: "ref", page.ref | where_exp: "p", "p.lang != 'en'" | first %}{% endif %}
+  <a class="lang-sw" href="{% if other %}{{ other.url | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}" hreflang="fr" title="Version française">FR</a>
+{% else %}
+  {% if page.ref %}{% assign other = site.posts | where: "ref", page.ref | where_exp: "p", "p.lang == 'en'" | first %}{% endif %}
+  <a class="lang-sw" href="{% if other %}{{ other.url | relative_url }}{% else %}{{ '/en/' | relative_url }}{% endif %}" hreflang="en" title="English version">EN</a>
+{% endif %}

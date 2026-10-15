@@ -3,7 +3,7 @@ layout: null
 permalink: /search.json
 ---
 [
-{% assign posts = site.posts | where_exp: "p", "p.hidden != true" %}{% for post in posts %}{
+{% assign posts = site.posts | where_exp: "p", "p.lang != 'en'" | where_exp: "p", "p.hidden != true" %}{% for post in posts %}{
   "title": {{ post.title | jsonify }},
   "url": {{ post.url | relative_url | jsonify }},
   "date": {{ post.date | date: '%d/%m/%Y' | jsonify }},

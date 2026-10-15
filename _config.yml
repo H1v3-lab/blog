@@ -15,7 +15,7 @@ github: "https://github.com/H1v3-lab"
 email: "contact@sakoi-cyber.me"
 
 # Newsletter sans pistage (Buttondown) : mets ton identifiant pour activer le formulaire d'abonnement.
-# buttondown: "dmod"
+buttondown: "Dmod"
 # Statistiques sans cookie (Cloudflare Web Analytics) : colle ton jeton pour activer le script.
 # cf_analytics_token: ""
 
