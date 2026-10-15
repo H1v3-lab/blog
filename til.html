@@ -1,0 +1,22 @@
+---
+layout: default
+title: TIL — Today I Learned
+permalink: /til/
+description: "Notes courtes : une chose apprise, en quelques lignes."
+---
+<section class="hero small">
+  <div class="prompt"><i>&gt;_</i> cat ~/notes/til</div>
+  <h1><span class="br">&lt;</span> TIL <span class="br">/&gt;</span></h1>
+  <p class="lead">« Today I Learned » : des notes courtes, une idée par note. Moins léché qu'un article, mais publié souvent.</p>
+</section>
+<section class="list">
+  {% assign tils = site.posts | where_exp: "p", "p.tags contains 'til'" %}
+  {% for post in tils %}
+  <a class="card til" href="{{ post.url | relative_url }}">
+    <div class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d/%m/%Y' }}</time><span class="badge">TIL</span></div>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
+  </a>
+  {% endfor %}
+  {% if tils.size == 0 %}<p class="empty">Première note bientôt.</p>{% endif %}
+</section>

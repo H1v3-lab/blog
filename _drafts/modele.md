@@ -1,8 +1,11 @@
 ---
 title: "Titre de l'article"
-description: "Une phrase qui résume l'article (affichée sur la page d'accueil et dans les aperçus de partage)."
+description: "Une phrase qui résume l'article (page d'accueil, aperçus de partage, recherche)."
 tags: [ctf, web]
-# image: /assets/img/mon-image.png   # optionnel : image d'aperçu pour les réseaux sociaux
+# series: "Nom de la série"      # optionnel : regroupe plusieurs articles (bannière + page d'accueil)
+# hidden: true                   # optionnel : garde l'article accessible par URL mais hors de la liste
+# toc: false                     # optionnel : masque le sommaire automatique
+# image: /assets/img/apercu.png  # optionnel : image d'aperçu réseaux sociaux
 ---
 
 Introduction : le contexte en deux ou trois phrases.

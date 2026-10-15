@@ -10,6 +10,9 @@ layout: default
     {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
     {% if page.tags.size > 0 %}<div class="tags">{% for t in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">#{{ t }}</a>{% endfor %}</div>{% endif %}
   </header>
+  {% if page.series %}{% assign sp = site.posts | where: "series", page.series | sort: "date" %}
+  <nav class="series-nav"><span class="kicker">Série · {{ page.series }}</span><ol>{% for p in sp %}<li{% if p.url == page.url %} class="cur" aria-current="true"{% endif %}><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>{% endfor %}</ol></nav>
+  {% endif %}
   {% if page.toc != false %}<nav class="toc" id="toc" hidden><span class="kicker">Sommaire</span><ol></ol></nav>{% endif %}
   <div class="md">{{ content }}</div>
   <aside class="author">
@@ -22,3 +25,4 @@ layout: default
     {% if page.next %}<a class="nx" href="{{ page.next.url | relative_url }}"><small>Suivant</small>{{ page.next.title }}</a>{% endif %}
   </nav>
 </article>
+{% include newsletter.html %}

@@ -13,11 +13,26 @@ Blog de Dmod (Dominique-Savio SAKOI). Site statique généré par **Jekyll**, pu
 Brouillons : un fichier dans `_drafts/` n'est jamais publié.
 Images : dépose-les dans `assets/img/` et insère-les avec `![description](/assets/img/fichier.png)`.
 
+### Options de l'en-tête
+
+- `series: "Nom"` — regroupe plusieurs articles ; une bannière de navigation apparaît dans chaque article de la série, et une carte sur la page d'accueil.
+- `tags: [til, ...]` — un article avec le tag `til` apparaît aussi sur la page **/til/** (notes courtes).
+- `hidden: true` — l'article reste accessible par son URL mais n'apparaît ni dans la liste, ni dans la recherche, ni dans le RSS.
+- `toc: false` — masque le sommaire automatique.
+
 ## Ce que le blog fait tout seul
 
-- page d'accueil avec filtre par tag, page `/tags/`, temps de lecture, sommaire automatique (≥ 3 titres), bouton « copier » sur les blocs de code, coloration syntaxique ;
-- flux RSS (`/feed.xml`), plan du site (`/sitemap.xml`) et balises de partage (titre, description) ;
-- articles précédent / suivant, lien vers le portfolio.
+- page d'accueil avec **recherche instantanée**, filtre par tag, page `/tags/`, page `/til/`, **séries** d'articles ;
+- temps de lecture, sommaire automatique (≥ 3 titres), bouton « copier » sur les blocs de code, coloration syntaxique ;
+- flux RSS (`/feed.xml`), plan du site (`/sitemap.xml`), index de recherche (`/search.json`) et balises de partage ;
+- articles précédent / suivant, lien vers le portfolio, **polices auto-hébergées** (aucune requête tierce).
+
+## Newsletter et statistiques (optionnels, sans pistage)
+
+Dans `_config.yml`, deux réglages commentés :
+
+- `buttondown: "ton-identifiant"` — active le formulaire d'abonnement par e-mail via [Buttondown](https://buttondown.com). Tant qu'il est vide, le site n'affiche que l'abonnement RSS.
+- `cf_analytics_token: "…"` — colle le jeton de **Cloudflare Web Analytics** (Cloudflare → Analytics → Web Analytics) pour des statistiques **sans cookie**. Tant qu'il est vide, aucun script de mesure n'est chargé.
 
 ## Domaine
 

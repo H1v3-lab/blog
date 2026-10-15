@@ -23,4 +23,25 @@
     f.addEventListener("click",e=>{const b=e.target.closest("button");if(b)apply(b.dataset.tag)});
     const h=decodeURIComponent(location.hash.slice(1));if(h)apply(h);
   }
+
+  /* instant search on the home page: filter cards by title/description/tags, deep-match body via /search.json */
+  const q=document.getElementById("q");
+  if(q){const cards=[...document.querySelectorAll("#list .card")];
+    const none=document.getElementById("noresult"),series=document.getElementById("series"),filters=document.getElementById("filters");
+    let index=null;
+    fetch("/search.json").then(r=>r.json()).then(d=>{index=d}).catch(()=>{});
+    const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    const run=()=>{const term=norm(q.value.trim());
+      if(filters)filters.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.tag===""));
+      if(!term){cards.forEach(c=>c.classList.remove("hide"));if(none)none.hidden=true;if(series)series.hidden=false;return}
+      if(series)series.hidden=true;
+      let shown=0;
+      cards.forEach(c=>{let ok=norm(c.dataset.text||"").includes(term);
+        if(!ok&&index){const u=c.getAttribute("href");const hit=index.find(i=>i.url===u);if(hit)ok=norm(hit.body||"").includes(term)}
+        c.classList.toggle("hide",!ok);if(ok)shown++});
+      if(none)none.hidden=shown>0};
+    q.addEventListener("input",run);
+    const p=new URLSearchParams(location.search).get("q");if(p){q.value=p;run()}
+  }
+
 })();
