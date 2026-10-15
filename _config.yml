@@ -17,7 +17,7 @@ email: "contact@sakoi-cyber.me"
 # Newsletter sans pistage (Buttondown) : mets ton identifiant pour activer le formulaire d'abonnement.
 buttondown: "Dmod"
 # Statistiques sans cookie (Cloudflare Web Analytics) : colle ton jeton pour activer le script.
-# cf_analytics_token: ""
+cf_analytics_token: "b4bf93494e4142eeadef8e40756c69a2"
 
 permalink: /:year/:month/:title/
 markdown: kramdown
