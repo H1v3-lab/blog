@@ -1,0 +1,33 @@
+# Blog de Dmod — publié par GitHub Pages sur https://blog.sakoi-cyber.me
+title: "Dmod · Blog"
+description: "Cybersécurité offensive, CTF, défense et vie privée — les notes de Dominique-Savio SAKOI (Dmod)."
+url: "https://blog.sakoi-cyber.me"
+baseurl: ""
+lang: fr
+locale: fr_FR
+timezone: Africa/Lome
+author:
+  name: Dominique-Savio SAKOI
+  handle: Dmod
+portfolio: "https://sakoi-cyber.me"
+linkedin: "https://www.linkedin.com/in/dominique-savio-sakoi-b607b333a"
+github: "https://github.com/H1v3-lab"
+
+permalink: /:year/:month/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+highlighter: rouge
+excerpt_separator: "<!--more-->"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+exclude: [README.md, Gemfile, Gemfile.lock, vendor]

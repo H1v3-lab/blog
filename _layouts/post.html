@@ -1,0 +1,24 @@
+---
+layout: default
+---
+{% assign words = content | strip_html | number_of_words %}{% assign minutes = words | divided_by: 200 | plus: 1 %}
+<article class="post">
+  <a class="back" href="{{ '/' | relative_url }}">← Tous les articles</a>
+  <header class="post-h">
+    <div class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%d/%m/%Y' }}</time><span>·</span><span>{{ minutes }} min de lecture</span></div>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    {% if page.tags.size > 0 %}<div class="tags">{% for t in page.tags %}<a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">#{{ t }}</a>{% endfor %}</div>{% endif %}
+  </header>
+  {% if page.toc != false %}<nav class="toc" id="toc" hidden><span class="kicker">Sommaire</span><ol></ol></nav>{% endif %}
+  <div class="md">{{ content }}</div>
+  <aside class="author">
+    <span class="logo">0_0</span>
+    <div><b>Dominique-Savio SAKOI · Dmod</b><p>Junior Security Engineer à l'esprit offensif, joueur de CTF et défenseur de la vie privée.</p>
+    <a href="{{ site.portfolio }}">Portfolio</a> · <a href="{{ site.linkedin }}">LinkedIn</a></div>
+  </aside>
+  <nav class="pn">
+    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>Précédent</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a class="nx" href="{{ page.next.url | relative_url }}"><small>Suivant</small>{{ page.next.title }}</a>{% endif %}
+  </nav>
+</article>

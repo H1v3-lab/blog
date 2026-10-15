@@ -1,0 +1,24 @@
+---
+layout: default
+title: Articles
+---
+<section class="hero">
+  <div class="prompt"><i>&gt;_</i> cat ~/blog/README</div>
+  <h1><span class="br">&lt;</span> Blog <span class="br">/&gt;</span></h1>
+  <p class="lead">{{ site.description }}</p>
+  {% assign all_tags = site.tags | sort %}
+  {% if all_tags.size > 0 %}<div class="filters" id="filters"><button type="button" class="on" data-tag="">Tous</button>{% for t in all_tags %}<button type="button" data-tag="{{ t[0] | slugify }}">#{{ t[0] }} <small>{{ t[1].size }}</small></button>{% endfor %}</div>{% endif %}
+</section>
+<section class="list" id="list">
+  {% for post in site.posts %}
+  {% assign words = post.content | strip_html | number_of_words %}{% assign minutes = words | divided_by: 200 | plus: 1 %}
+  <a class="card{% if forloop.first %} first{% endif %}" href="{{ post.url | relative_url }}" data-tags="{% for t in post.tags %}{{ t | slugify }} {% endfor %}">
+    <div class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d/%m/%Y' }}</time><span>·</span><span>{{ minutes }} min</span></div>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description | default: post.excerpt | strip_html | truncate: 220 }}</p>
+    {% if post.tags.size > 0 %}<div class="tags">{% for t in post.tags %}<span class="tag">#{{ t }}</span>{% endfor %}</div>{% endif %}
+    <span class="go">Lire →</span>
+  </a>
+  {% endfor %}
+  {% if site.posts.size == 0 %}<p class="empty">Premier article bientôt.</p>{% endif %}
+</section>
